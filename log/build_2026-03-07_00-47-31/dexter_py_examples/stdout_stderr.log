@@ -1,0 +1,31 @@
+running develop
+running egg_info
+creating dexter_py_examples.egg-info
+writing dexter_py_examples.egg-info/PKG-INFO
+writing dependency_links to dexter_py_examples.egg-info/dependency_links.txt
+writing entry points to dexter_py_examples.egg-info/entry_points.txt
+writing requirements to dexter_py_examples.egg-info/requires.txt
+writing top-level names to dexter_py_examples.egg-info/top_level.txt
+writing manifest file 'dexter_py_examples.egg-info/SOURCES.txt'
+reading manifest file 'dexter_py_examples.egg-info/SOURCES.txt'
+writing manifest file 'dexter_py_examples.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/aditya/Dexter/install/dexter_py_examples/lib/python3.12/site-packages/dexter-py-examples.egg-link (link to .)
+Installing simple_action_client script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+Installing simple_action_server script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+Installing simple_moveit_interface script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+Installing simple_parameter script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+Installing simple_publisher script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+Installing simple_service_client script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+Installing simple_service_server script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+Installing simple_subscriber script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+
+Installed /home/aditya/Dexter/build/dexter_py_examples
+running symlink_data
+creating /home/aditya/Dexter/install/dexter_py_examples/share/ament_index
+creating /home/aditya/Dexter/install/dexter_py_examples/share/ament_index/resource_index
+creating /home/aditya/Dexter/install/dexter_py_examples/share/ament_index/resource_index/packages
+symbolically linking /home/aditya/Dexter/build/dexter_py_examples/resource/dexter_py_examples -> /home/aditya/Dexter/install/dexter_py_examples/share/ament_index/resource_index/packages
+symbolically linking /home/aditya/Dexter/build/dexter_py_examples/package.xml -> /home/aditya/Dexter/install/dexter_py_examples/share/dexter_py_examples
+creating /home/aditya/Dexter/install/dexter_py_examples/share/dexter_py_examples/launch
+symbolically linking /home/aditya/Dexter/build/dexter_py_examples/launch/simple_moveit_interface.launch.py -> /home/aditya/Dexter/install/dexter_py_examples/share/dexter_py_examples/launch

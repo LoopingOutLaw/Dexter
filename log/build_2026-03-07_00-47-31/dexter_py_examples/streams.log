@@ -1,0 +1,33 @@
+[2.598s] Invoking command in '/home/aditya/Dexter/build/dexter_py_examples': AMENT_PREFIX_PATH=/home/aditya/Dexter/install/dexter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/aditya/Dexter/install/dexter_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/aditya/Dexter/install/dexter_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/aditya/Dexter/build/dexter_py_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/aditya/Dexter/install/dexter_py_examples/lib/python3.12/site-packages:/home/aditya/Dexter/install/dexter_msgs/lib/python3.12/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(venv-ardupilot) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/aditya/Dexter/build/dexter_py_examples/build --no-deps symlink_data
+[3.449s] running develop
+[3.943s] running egg_info
+[3.943s] creating dexter_py_examples.egg-info
+[3.991s] writing dexter_py_examples.egg-info/PKG-INFO
+[3.992s] writing dependency_links to dexter_py_examples.egg-info/dependency_links.txt
+[3.992s] writing entry points to dexter_py_examples.egg-info/entry_points.txt
+[3.993s] writing requirements to dexter_py_examples.egg-info/requires.txt
+[3.993s] writing top-level names to dexter_py_examples.egg-info/top_level.txt
+[3.993s] writing manifest file 'dexter_py_examples.egg-info/SOURCES.txt'
+[4.088s] reading manifest file 'dexter_py_examples.egg-info/SOURCES.txt'
+[4.090s] writing manifest file 'dexter_py_examples.egg-info/SOURCES.txt'
+[4.140s] running build_ext
+[4.140s] Creating /home/aditya/Dexter/install/dexter_py_examples/lib/python3.12/site-packages/dexter-py-examples.egg-link (link to .)
+[4.142s] Installing simple_action_client script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+[4.142s] Installing simple_action_server script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+[4.142s] Installing simple_moveit_interface script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+[4.142s] Installing simple_parameter script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+[4.143s] Installing simple_publisher script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+[4.143s] Installing simple_service_client script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+[4.143s] Installing simple_service_server script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+[4.143s] Installing simple_subscriber script to /home/aditya/Dexter/install/dexter_py_examples/lib/dexter_py_examples
+[4.144s] 
+[4.144s] Installed /home/aditya/Dexter/build/dexter_py_examples
+[4.144s] running symlink_data
+[4.144s] creating /home/aditya/Dexter/install/dexter_py_examples/share/ament_index
+[4.144s] creating /home/aditya/Dexter/install/dexter_py_examples/share/ament_index/resource_index
+[4.144s] creating /home/aditya/Dexter/install/dexter_py_examples/share/ament_index/resource_index/packages
+[4.145s] symbolically linking /home/aditya/Dexter/build/dexter_py_examples/resource/dexter_py_examples -> /home/aditya/Dexter/install/dexter_py_examples/share/ament_index/resource_index/packages
+[4.145s] symbolically linking /home/aditya/Dexter/build/dexter_py_examples/package.xml -> /home/aditya/Dexter/install/dexter_py_examples/share/dexter_py_examples
+[4.145s] creating /home/aditya/Dexter/install/dexter_py_examples/share/dexter_py_examples/launch
+[4.145s] symbolically linking /home/aditya/Dexter/build/dexter_py_examples/launch/simple_moveit_interface.launch.py -> /home/aditya/Dexter/install/dexter_py_examples/share/dexter_py_examples/launch
+[4.217s] Invoked command in '/home/aditya/Dexter/build/dexter_py_examples' returned '0': AMENT_PREFIX_PATH=/home/aditya/Dexter/install/dexter_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/aditya/Dexter/install/dexter_msgs:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/aditya/Dexter/install/dexter_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/aditya/Dexter/build/dexter_py_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/aditya/Dexter/install/dexter_py_examples/lib/python3.12/site-packages:/home/aditya/Dexter/install/dexter_msgs/lib/python3.12/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(venv-ardupilot) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/aditya/Dexter/build/dexter_py_examples/build --no-deps symlink_data

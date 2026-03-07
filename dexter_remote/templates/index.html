@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dexter - Robot Arm Control</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f23;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin: 30px 0 10px;
+            font-size: 2.2rem;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        .subtitle {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+            padding: 0 20px;
+        }
+        .card {
+            background: #1a1a2e;
+            border: 1px solid #2a2a4a;
+            border-radius: 12px;
+            padding: 24px;
+            flex: 1;
+            min-width: 280px;
+        }
+        .card h2 {
+            font-size: 1.1rem;
+            color: #00d4ff;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #2a2a4a;
+            padding-bottom: 10px;
+        }
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .btn {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .btn:active { transform: translateY(0); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .btn-home { background: #2196F3; color: white; }
+        .btn-home:hover { background: #1e88e5; }
+        .btn-pick { background: #4CAF50; color: white; }
+        .btn-pick:hover { background: #43a047; }
+        .btn-sleep { background: #9C27B0; color: white; }
+        .btn-sleep:hover { background: #8e24aa; }
+        .btn-wake { background: #FF9800; color: white; }
+        .btn-wake:hover { background: #f57c00; }
+
+        .voice-section {
+            text-align: center;
+            margin-top: 8px;
+        }
+        .btn-voice {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #1a1a2e;
+            border: 3px solid #00d4ff;
+            color: #00d4ff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-voice:hover { background: #00d4ff22; }
+        .btn-voice.listening {
+            background: #ff4444;
+            border-color: #ff4444;
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,68,68,0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(255,68,68,0); }
+        }
+        .voice-hint {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .voice-hint strong { color: #aaa; }
+        .transcript {
+            margin-top: 10px;
+            padding: 10px;
+            background: #0f0f23;
+            border-radius: 6px;
+            font-style: italic;
+            color: #aaa;
+            min-height: 36px;
+            font-size: 0.9rem;
+        }
+        #status-log {
+            margin-top: 20px;
+            max-width: 860px;
+            width: 100%;
+            padding: 0 20px 30px;
+        }
+        #status-log h2 {
+            font-size: 1.1rem;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        .log-box {
+            background: #1a1a2e;
+            border: 1px solid #2a2a4a;
+            border-radius: 8px;
+            padding: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+        .log-entry { padding: 3px 0; border-bottom: 1px solid #1f1f3a; }
+        .log-entry:last-child { border-bottom: none; }
+        .log-time { color: #555; }
+        .log-ok { color: #4CAF50; }
+        .log-err { color: #f44336; }
+        .log-info { color: #00d4ff; }
+        .no-speech-warning {
+            background: #332200;
+            border: 1px solid #665500;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #ffaa00;
+        }
+    </style>
+</head>
+<body>
+    <h1>DEXTER</h1>
+    <p class="subtitle">3-DOF Robotic Arm Control Panel</p>
+
+    <div class="container">
+        <div class="card">
+            <h2>Task Commands</h2>
+            <div class="btn-grid">
+                <button class="btn btn-home" onclick="sendTask(0)">Home</button>
+                <button class="btn btn-pick" onclick="sendTask(1)">Pick</button>
+                <button class="btn btn-sleep" onclick="sendTask(2)">Sleep</button>
+                <button class="btn btn-wake" onclick="sendTask(0)">Wake</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Voice Control</h2>
+            <div class="voice-section">
+                <button class="btn-voice" id="voiceBtn" onclick="toggleVoice()">
+                    <span id="micIcon">&#x1F3A4;</span>
+                </button>
+                <div class="voice-hint">
+                    Say: <strong>home</strong>, <strong>pick</strong>, <strong>sleep</strong>, or <strong>wake</strong>
+                </div>
+                <div class="transcript" id="transcript">Press the microphone to start...</div>
+                <div id="speechWarning"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="status-log">
+        <h2>Activity Log</h2>
+        <div class="log-box" id="logBox"></div>
+    </div>
+
+    <script>
+        let listening = false;
+        let recognition = null;
+
+        // Check for Web Speech API support
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            document.getElementById('speechWarning').innerHTML =
+                '<div class="no-speech-warning">Voice control is not supported in this browser. Use Chrome or Edge for voice commands.</div>';
+            document.getElementById('voiceBtn').disabled = true;
+        }
+
+        function logMessage(msg, type) {
+            const box = document.getElementById('logBox');
+            const time = new Date().toLocaleTimeString();
+            const cls = type === 'ok' ? 'log-ok' : type === 'err' ? 'log-err' : 'log-info';
+            box.innerHTML = '<div class="log-entry"><span class="log-time">[' + time + ']</span> <span class="' + cls + '">' + msg + '</span></div>' + box.innerHTML;
+        }
+
+        let taskInProgress = false;
+
+        function sendTask(taskNumber) {
+            if (taskInProgress) {
+                logMessage('A task is already running, please wait...', 'err');
+                return;
+            }
+
+            const names = {0: 'Home/Wake', 1: 'Pick', 2: 'Sleep'};
+            logMessage('Sending command: ' + names[taskNumber] + ' (task ' + taskNumber + ')', 'info');
+
+            taskInProgress = true;
+            document.querySelectorAll('.btn').forEach(b => b.disabled = true);
+
+            fetch('/task', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({task_number: taskNumber})
+            })
+            .then(r => {
+                if (!r.ok && r.headers.get('content-type')?.includes('application/json') === false) {
+                    throw new Error('Server error (HTTP ' + r.status + ')');
+                }
+                return r.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    logMessage(data.message, 'ok');
+                } else {
+                    logMessage(data.message, 'err');
+                }
+            })
+            .catch(err => {
+                logMessage('Connection error: ' + err.message, 'err');
+            })
+            .finally(() => {
+                taskInProgress = false;
+                document.querySelectorAll('.btn').forEach(b => b.disabled = false);
+            });
+        }
+
+        function toggleVoice() {
+            if (!SpeechRecognition) return;
+
+            if (listening) {
+                recognition.stop();
+                return;
+            }
+
+            recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.interimResults = true;
+            recognition.continuous = false;
+
+            recognition.onstart = () => {
+                listening = true;
+                document.getElementById('voiceBtn').classList.add('listening');
+                document.getElementById('transcript').textContent = 'Listening...';
+                logMessage('Voice recognition started', 'info');
+            };
+
+            recognition.onresult = (event) => {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+                document.getElementById('transcript').textContent = transcript;
+
+                if (event.results[event.resultIndex].isFinal) {
+                    processVoiceCommand(transcript.toLowerCase().trim());
+                }
+            };
+
+            recognition.onerror = (event) => {
+                logMessage('Voice error: ' + event.error, 'err');
+                stopListening();
+            };
+
+            recognition.onend = () => {
+                stopListening();
+            };
+
+            recognition.start();
+        }
+
+        function stopListening() {
+            listening = false;
+            document.getElementById('voiceBtn').classList.remove('listening');
+        }
+
+        function processVoiceCommand(text) {
+            logMessage('Heard: "' + text + '"', 'info');
+
+            if (text.includes('pick') || text.includes('grab') || text.includes('move')) {
+                sendTask(1);
+            } else if (text.includes('sleep') || text.includes('rest') || text.includes('off')) {
+                sendTask(2);
+            } else if (text.includes('wake') || text.includes('ready') || text.includes('up')) {
+                sendTask(0);
+            } else if (text.includes('home') || text.includes('reset') || text.includes('start')) {
+                sendTask(0);
+            } else {
+                logMessage('Unknown command: "' + text + '". Try: home, pick, sleep, wake', 'err');
+            }
+        }
+
+        logMessage('Dexter web interface ready', 'ok');
+    </script>
+</body>
+</html>

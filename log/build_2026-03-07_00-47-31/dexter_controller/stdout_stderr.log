@@ -1,0 +1,103 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /home/aditya/venv-ardupilot/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found trajectory_msgs: 5.3.6 (/opt/ros/jazzy/share/trajectory_msgs/cmake)
+-- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found sensor_msgs: 5.3.6 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+-- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found rclpy: 7.1.9 (/opt/ros/jazzy/share/rclpy/cmake)
+-- Found hardware_interface: 4.42.2 (/opt/ros/jazzy/share/hardware_interface/cmake)
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.1") 
+-- Checking for module 'libserial'
+--   Found libserial, version 1.0.0
+-- Configuring done (5.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/aditya/Dexter/build/dexter_controller
+[ 25%] Building CXX object CMakeFiles/slider_control.dir/src/slider_control.cpp.o
+[ 25%] Built target ament_cmake_python_symlink_dexter_controller
+[ 50%] Building CXX object CMakeFiles/dexter_controller.dir/src/dexter_interface.cpp.o
+running egg_info
+creating dexter_controller.egg-info
+writing dexter_controller.egg-info/PKG-INFO
+writing dependency_links to dexter_controller.egg-info/dependency_links.txt
+writing top-level names to dexter_controller.egg-info/top_level.txt
+writing manifest file 'dexter_controller.egg-info/SOURCES.txt'
+reading manifest file 'dexter_controller.egg-info/SOURCES.txt'
+writing manifest file 'dexter_controller.egg-info/SOURCES.txt'
+[ 50%] Built target ament_cmake_python_build_dexter_controller_egg
+/home/aditya/Dexter/dexter_controller/src/dexter_interface.cpp: In member function ‘virtual dexter_controller::CallbackReturn dexter_controller::DexterInterface::on_init(const hardware_interface::HardwareInfo&)’:
+/home/aditya/Dexter/dexter_controller/src/dexter_interface.cpp:46:71: warning: ‘virtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn hardware_interface::HardwareComponentInterface::on_init(const hardware_interface::HardwareInfo&)’ is deprecated: Use on_init(const HardwareComponentInterfaceParams & params) instead. [-Wdeprecated-declarations]
+   46 |   CallbackReturn result = hardware_interface::SystemInterface::on_init(hardware_info);
+      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+In file included from /opt/ros/jazzy/include/hardware_interface/hardware_interface/system_interface.hpp:18,
+                 from /home/aditya/Dexter/dexter_controller/include/dexter_controller/dexter_interface.hpp:5,
+                 from /home/aditya/Dexter/dexter_controller/src/dexter_interface.cpp:1:
+/opt/ros/jazzy/include/hardware_interface/hardware_interface/hardware_component_interface.hpp:140:26: note: declared here
+  140 |   virtual CallbackReturn on_init(const HardwareInfo & hardware_info);
+      |                          ^~~~~~~
+[ 75%] Linking CXX shared library libdexter_controller.so
+[ 75%] Built target dexter_controller
+[100%] Linking CXX executable slider_control
+[100%] Built target slider_control
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller//dexter_controller.xml
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/environment/pythonpath.sh
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/environment/pythonpath.dsv
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/lib/python3.12/site-packages/dexter_controller-0.0.0-py3.12.egg-info/PKG-INFO
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/lib/python3.12/site-packages/dexter_controller-0.0.0-py3.12.egg-info/SOURCES.txt
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/lib/python3.12/site-packages/dexter_controller-0.0.0-py3.12.egg-info/dependency_links.txt
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/lib/python3.12/site-packages/dexter_controller-0.0.0-py3.12.egg-info/top_level.txt
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/lib/python3.12/site-packages/dexter_controller/__init__.py
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/lib/python3.12/site-packages/dexter_controller/slider_control.py
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/lib/dexter_controller/slider_control
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/lib/libdexter_controller.so
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/include/include/dexter_controller/dexter_interface.hpp
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/launch/controller.launch.py
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/launch/slider_controller.launch.py
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/config/dexter_controllers.yaml
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/lib/dexter_controller/slider_control.py
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/environment/library_path.sh
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/environment/library_path.dsv
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/ament_index/resource_index/package_run_dependencies/dexter_controller
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/ament_index/resource_index/parent_prefix_path/dexter_controller
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/environment/ament_prefix_path.sh
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/environment/ament_prefix_path.dsv
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/environment/path.sh
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/environment/path.dsv
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/local_setup.bash
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/local_setup.sh
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/local_setup.zsh
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/local_setup.dsv
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/package.dsv
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/ament_index/resource_index/packages/dexter_controller
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/dexter_controller
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/cmake/ament_cmake_export_libraries-extras.cmake
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/cmake/dexter_controllerConfig.cmake
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/cmake/dexter_controllerConfig-version.cmake
+-- Symlinking: /home/aditya/Dexter/install/dexter_controller/share/dexter_controller/package.xml
+Listing '/home/aditya/Dexter/install/dexter_controller/lib/python3.12/site-packages/dexter_controller'...
+Compiling '/home/aditya/Dexter/install/dexter_controller/lib/python3.12/site-packages/dexter_controller/__init__.py'...
+Compiling '/home/aditya/Dexter/install/dexter_controller/lib/python3.12/site-packages/dexter_controller/slider_control.py'...
