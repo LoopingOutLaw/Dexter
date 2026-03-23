@@ -4,7 +4,7 @@
   <name>dexter_remote</name>
   <version>0.0.0</version>
   <description>Remote control interface for the Dexter robotic arm (web UI with voice commands)</description>
-  <maintainer email="antonio.brandi@outlook.it">Antonio Brandi</maintainer>
+  <maintainer email="aditya@todo.todo">aditya</maintainer>
   <license>Apache 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
@@ -16,6 +16,9 @@
   <depend>dexter_msgs</depend>
   <depend>moveit_ros_planning_interface</depend>
   <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>trajectory_msgs</depend>
+  <depend>builtin_interfaces</depend>
 
   <exec_depend>ros2launch</exec_depend>
   <exec_depend>python3-flask</exec_depend>

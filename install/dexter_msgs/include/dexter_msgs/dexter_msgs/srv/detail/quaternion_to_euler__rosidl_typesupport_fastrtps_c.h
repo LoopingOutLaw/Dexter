@@ -1,1 +1,0 @@
-/home/aditya/Dexter/build/dexter_msgs/rosidl_typesupport_fastrtps_c/dexter_msgs/srv/detail/quaternion_to_euler__rosidl_typesupport_fastrtps_c.h

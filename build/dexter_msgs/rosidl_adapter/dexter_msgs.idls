@@ -1,5 +1,0 @@
-/home/aditya/Dexter/build/dexter_msgs/rosidl_adapter/dexter_msgs:srv/AddTwoInts.idl
-/home/aditya/Dexter/build/dexter_msgs/rosidl_adapter/dexter_msgs:srv/EulerToQuaternion.idl
-/home/aditya/Dexter/build/dexter_msgs/rosidl_adapter/dexter_msgs:srv/QuaternionToEuler.idl
-/home/aditya/Dexter/build/dexter_msgs/rosidl_adapter/dexter_msgs:action/Fibonacci.idl
-/home/aditya/Dexter/build/dexter_msgs/rosidl_adapter/dexter_msgs:action/DexterTask.idl

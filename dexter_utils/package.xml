@@ -4,7 +4,7 @@
   <name>dexter_utils</name>
   <version>0.0.0</version>
   <description>The dexter_utils package</description>
-  <maintainer email="antonio.brandi@outlook.it">Antonio Brandi</maintainer>
+  <maintainer email="aditya@todo.todo">aditya</maintainer>
   <license>Apache 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>

@@ -1,1 +1,0 @@
-/home/aditya/Dexter/dexter_bringup/launch/simulated_robot.launch.py
