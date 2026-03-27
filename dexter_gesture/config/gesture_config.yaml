@@ -1,0 +1,57 @@
+# gesture_config.yaml
+# Parameters for the gesture_receiver node.
+#
+# Load with:
+#   ros2 launch dexter_gesture gesture_control.launch.py \
+#       --ros-args --params-file /path/to/gesture_config.yaml
+
+gesture_receiver:
+  ros__parameters:
+
+    # ── Network ────────────────────────────────────────────────
+    udp_port: 5005            # Must match ESP32 UDP_PORT
+
+    # ── Smoothing ──────────────────────────────────────────────
+    # 0.0 = frozen  |  1.0 = raw (no smoothing)
+    # Start at 0.20. Raise to 0.35 if response feels sluggish.
+    smoothing_alpha: 0.20
+
+    # Angle change below this (degrees) is ignored (hand tremor filter)
+    deadband_deg: 0.5
+
+    # ── Controller timing ──────────────────────────────────────
+    # How long (ms) the controller gets to reach each commanded pose.
+    # 80ms works well at 50Hz. Increase to 120 if joints oscillate.
+    trajectory_duration_ms: 80
+
+    # ── Axis inversion ─────────────────────────────────────────
+    # If any joint moves OPPOSITE to what you expect, flip it here.
+    invert_roll:  false    # roll  → elbow fine-tune offset
+    invert_pitch: false    # pitch → arm reach (shoulder + elbow)
+    invert_yaw:   false    # yaw   → base rotation
+
+    # ── Reach coupling gains ───────────────────────────────────
+    # When you tilt your wrist forward (pitch), the arm "reaches"
+    # forward by moving both shoulder and elbow together.
+    #
+    # shoulder_gain: how strongly pitch drives joint_2 (shoulder)
+    # elbow_gain:    how strongly pitch drives joint_3 (elbow)
+    #
+    # Both = 1.0  → maximum reach arc
+    # shoulder_gain=1.0, elbow_gain=0.6  → smoother arc (default)
+    # shoulder_gain=0.8, elbow_gain=0.8  → more symmetric
+    # Set elbow_gain=0.0 to disable elbow coupling (pitch = shoulder only)
+    shoulder_gain: 1.0
+    elbow_gain:    0.6
+
+    # ── Flex sensor calibration ────────────────────────────────
+    # 1. Flash ESP32, open Serial Monitor, hold hand OPEN
+    #    → note the "Flex:" value → set as flex_open_adc
+    # 2. Make a FIST → note the value → set as flex_closed_adc
+    # 3. Update here and restart the ROS node (no reflash needed)
+    #
+    # With 10kΩ pullup + 2.2" Electrobot flex sensor, typical values:
+    #   Open:   ~2900   Closed: ~3700
+    # (your sensor may differ slightly — always calibrate)
+    flex_open_adc:   2900.0
+    flex_closed_adc: 3700.0
