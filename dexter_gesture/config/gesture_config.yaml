@@ -1,9 +1,16 @@
 # gesture_config.yaml
-# Parameters for the gesture_receiver node.
+# Parameters for the gesture_receiver node (jerk-bounded 4-stage pipeline).
 #
 # Load with:
 #   ros2 launch dexter_gesture gesture_control.launch.py \
 #       --ros-args --params-file /path/to/gesture_config.yaml
+#
+# Pipeline stages:
+#   A. Deadband -- ignore sensor jitter below `deadband_deg`
+#   B. Low-pass one-pole EMA with `low_pass_alpha`
+#   C. Jerk-bounded S-curve smoother, runs at `smoother_rate_hz` on a
+#      wall-clock timer (independent of UDP arrival rate)
+#   D. Trajectory publish deadband -- skip publishes under `publish_deadband_rad`
 
 gesture_receiver:
   ros__parameters:
@@ -11,13 +18,37 @@ gesture_receiver:
     # ── Network ────────────────────────────────────────────────
     udp_port: 5005            # Must match ESP32 UDP_PORT
 
-    # ── Smoothing ──────────────────────────────────────────────
-    # 0.0 = frozen  |  1.0 = raw (no smoothing)
-    # Start at 0.20. Raise to 0.35 if response feels sluggish.
-    smoothing_alpha: 0.20
-
-    # Angle change below this (degrees) is ignored (hand tremor filter)
+    # ── Stage A: deadband ──────────────────────────────────────
+    # Angle change below this (degrees) is ignored (hand tremor filter).
+    # 0.5 deg filters tremor; raise to 1.0 if micro-jitters still slip through.
     deadband_deg: 0.5
+
+    # ── Stage B: low-pass one-pole EMA ─────────────────────────
+    # Output += alpha * (input - output)
+    # 0.0 = frozen, 1.0 = raw (no smoothing). Default 0.12 settles ~5s.
+    low_pass_alpha: 0.12
+
+    # ── Stage C: jerk-bounded S-curve smoother ─────────────────
+    # Runs on a wall-clock timer, decoupled from UDP rate (e.g. 50Hz ESP32).
+    smoother_rate_hz: 100
+
+    # Arm (joints 1..3): tuned for a 3-DOF arm with hobby servos.
+    max_velocity_rad_s:       1.2
+    max_acceleration_rad_s2:  6.0
+    max_jerk_rad_s3:          8.0
+    settling_time_s:          0.15
+
+    # Gripper (joint 4): slower, gentler -- gripper is more delicate.
+    gripper_max_velocity_rad_s:       0.8
+    gripper_max_acceleration_rad_s2:  4.0
+    gripper_max_jerk_rad_s3:          5.0
+    gripper_settling_time_s:          0.20
+
+    # ── Stage D: publish deadband ──────────────────────────────
+    # Suppress trajectory messages whose endpoints moved less than this
+    # (radians) since the last publish. Saves bandwidth below the jitter
+    # floor of the smoother but preserves device-command frequency.
+    publish_deadband_rad: 0.005
 
     # ── Controller timing ──────────────────────────────────────
     # How long (ms) the controller gets to reach each commanded pose.

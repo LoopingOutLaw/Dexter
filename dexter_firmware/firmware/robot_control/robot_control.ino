@@ -24,24 +24,32 @@ char value[4] = "000";
 
 
 /*
- * This function moves a given servo smoothly from a given start position to a given end position.
- * The movement can be both clockwise or counterclockwise based on the values assigned to
- * the start position and end position
+ * Apply a safe command to a servo.
+ *   - Clamps the goal into the absolute servo range (0..180)
+ *   - Skips writes if the new goal matches what the servo already holds
+ *     (eliminates I2C chatter and pulse stretching on busy bus)
+ *
+ * Smoothing is handled upstream in ROS 2 (gesture_receiver ->
+ * S-curve smoother -> JointTrajectory -> joint_trajectory_controller),
+ * so this firmware does NOT ramp one degree at a time. Looping with
+ * delay() here would re-introduce the very jerk we are killing in
+ * software and desynchronize from the controller's 50 Hz command rate.
  */
-void reach_goal(Servo& motor, int goal){
-  if(goal>=motor.read()){
-    // goes from the start point degrees to the end point degrees
-    for (int pos = motor.read(); pos <= goal; pos += 1) { 
-      motor.write(pos);     
-      delay(5);                       
-    }
-  } else{
-    // goes from the end point degrees to the start point degrees
-    for (int pos = motor.read(); pos >= goal; pos -= 1) { 
-      motor.write(pos);     
-      delay(5);                       
-    }
+int clamp_servo_angle(int goal) {
+  if (goal < 0)   return 0;
+  if (goal > 180) return 180;
+  return goal;
+}
+
+void apply_goal(Servo& motor, int goal) {
+  goal = clamp_servo_angle(goal);
+  if (goal != motor.read()) {
+    motor.write(goal);
   }
+}
+
+void reach_goal(Servo& motor, int goal) {
+  apply_goal(motor, goal);
 }
 
 void setup() {

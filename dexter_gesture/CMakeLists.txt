@@ -27,6 +27,16 @@ install(
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
+
+  # Pure-Python unit tests for motion_smoother and gesture_receiver.
+  # Selected by `colcon test --packages-select dexter_gesture`.
+  find_package(Python3 REQUIRED COMPONENTS Interpreter)
+  add_test(
+    NAME dexter_gesture_pytest
+    COMMAND "${Python3_EXECUTABLE}" -m pytest -v
+            "${CMAKE_CURRENT_SOURCE_DIR}/test"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  )
 endif()
 
 ament_package()
